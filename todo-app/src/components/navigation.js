@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import PropTypes from 'prop-types';
 import { PAGE_TYPES } from '../constants';
+import Button from 'react-bootstrap/Button';
 
 const Navigation = ({ setPageType }) => {
   return (
@@ -46,6 +47,7 @@ const Navigation = ({ setPageType }) => {
             Completed
           </Nav.Link>
         </Nav>
+        <Button variant="primary">Add Task</Button>
       </Container>
     </Navbar>
   );
