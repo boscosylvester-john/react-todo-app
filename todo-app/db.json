@@ -1,0 +1,20 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "subject": "Complete math hw",
+      "description": "",
+      "dueDate": "5/21/2023",
+      "reminderDate": "",
+      "status": "COMPLETED"
+    },
+    {
+      "id": 2,
+      "subject": "Complete science hw",
+      "description": "",
+      "dueDate": "5/20/2023",
+      "reminderDate": "",
+      "status": "PENDING"
+    }
+  ]
+}
