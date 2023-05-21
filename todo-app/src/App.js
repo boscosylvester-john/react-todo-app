@@ -5,7 +5,9 @@ import Navigation from './components/Navigation';
 import { PAGE_TYPES } from './constants';
 
 const App = () => {
-  const [pageType, setPageType] = useState(PAGE_TYPES.TASKS);
+  const [pageType, setPageType] = useState(
+    PAGE_TYPES.TASKS
+  );
 
   return (
     <div>

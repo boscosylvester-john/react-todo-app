@@ -1,0 +1,18 @@
+.task {
+	margin: 2% 1% 1% 1%;
+}
+
+.checkImage {
+	float: left;
+	margin-left: -1%;
+	width: 4%;
+	height: 4%;
+}
+
+.line {
+	float: left;
+	border-left: 6px solid gray;
+	height: 90%;
+	margin: -1% 0 0 3%;
+	position: absolute;
+}
