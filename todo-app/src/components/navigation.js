@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { PAGE_TYPES } from '../constants';
 import Button from 'react-bootstrap/Button';
 
-const Navigation = ({ setPageType }) => {
+const Navigation = ({ setPageType, updateTaskList }) => {
+  console.log(updateTaskList);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>

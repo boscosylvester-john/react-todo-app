@@ -1,22 +1,63 @@
-import React, { useEffect } from 'react';
-import { getTasks } from '../apiCalls';
+import React, { useEffect, useState } from 'react';
 import mainContentStyles from './MainContent.module.css';
 import TaskCard from './TaskCard';
+import { IS_FAVORITE, PAGE_TYPES } from '../constants';
 
-const MainContent = ({ pageType }) => {
+const MainContent = ({
+  pageType,
+  allTasks,
+  updateTaskList
+}) => {
+  const [currentTasks, setCurrentTasks] = useState([]);
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      const tasks = await getTasks();
-      console.log(tasks);
-      console.log(pageType);
-    };
-    fetchTasks();
-  });
+    let filteredTasks = allTasks;
+    switch (pageType) {
+      case PAGE_TYPES.COMPLETED:
+        filteredTasks = filteredTasks.filter(
+          (task) => task.status === pageType
+        );
+        break;
+      case PAGE_TYPES.MISSED_TASKS:
+        filteredTasks = filteredTasks.filter(
+          (task) =>
+            task.status === PAGE_TYPES.PENDING &&
+            new Date(task.dueDate) < new Date() &&
+            new Date(task.dueDate).toDateString() !==
+              new Date().toDateString()
+        );
+        break;
+      case PAGE_TYPES.MY_DAY:
+        filteredTasks = filteredTasks.filter(
+          (task) =>
+            new Date(task.dueDate).toDateString() ===
+            new Date().toDateString()
+        );
+        break;
+      case PAGE_TYPES.FAVORITES:
+        filteredTasks = filteredTasks.filter(
+          (task) => task.isFavorite === IS_FAVORITE.TRUE
+        );
+        break;
+      default:
+        break;
+    }
+    setCurrentTasks(filteredTasks);
+  }, [pageType, allTasks]);
 
   return (
     <div className={mainContentStyles.container}>
-      <TaskCard />
-      <TaskCard />
+      {currentTasks && currentTasks.length === 0
+        ? 'No tasks yet, start by creating new tasks'
+        : currentTasks.map((task, index) => {
+            return (
+              <TaskCard
+                task={task}
+                updateTaskList={updateTaskList}
+                key={index}
+              />
+            );
+          })}
     </div>
   );
 };

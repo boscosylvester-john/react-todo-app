@@ -11,7 +11,7 @@
 
 .line {
 	float: left;
-	border-left: 6px solid gray;
+	border-left: 2px solid gray;
 	height: 90%;
 	margin: -1% 0 0 3%;
 	position: absolute;

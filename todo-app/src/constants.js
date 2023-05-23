@@ -3,5 +3,16 @@ export const PAGE_TYPES = {
   MY_DAY: 'MY DAY',
   MISSED_TASKS: 'MISSED TASKS',
   FAVORITES: 'FAVORITES',
-  COMPLETED: 'COMPLETED'
+  COMPLETED: 'COMPLETED',
+  PENDING: 'PENDING'
+};
+
+export const IS_FAVORITE = {
+  TRUE: 'TRUE',
+  FALSE: 'FALSE'
+};
+
+export const ACTION_TYPE = {
+  NEW: 'NEW',
+  UPDATE: 'UPDATE'
 };

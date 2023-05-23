@@ -4,17 +4,21 @@
       "id": 1,
       "subject": "Complete math hw",
       "description": "",
-      "dueDate": "5/21/2023",
+      "dueDate": "2023-05-21",
       "reminderDate": "",
-      "status": "COMPLETED"
+      "status": "COMPLETED",
+      "isFavorite": "FALSE",
+      "createdOn": "2023-05-13"
     },
     {
       "id": 2,
       "subject": "Complete science hw",
       "description": "",
-      "dueDate": "5/20/2023",
+      "dueDate": "2023-05-20",
       "reminderDate": "",
-      "status": "PENDING"
+      "status": "PENDING",
+      "isFavorite": "TRUE",
+      "createdOn": "2023-05-13"
     }
   ]
 }
