@@ -3,8 +3,10 @@ import Card from 'react-bootstrap/Card';
 import taskCardStyles from './TaskCard.module.css';
 import completedTaskImg from '../icons/completedtasks.png';
 import pendingTaskImg from '../icons/pendingtasks.png';
+import filledStarImg from '../icons/filledstar.png';
+import unfilledStarImg from '../icons/unfilledstar.png';
 import TaskContents from './TaskContents';
-import { PAGE_TYPES } from '../constants';
+import { IS_FAVORITE, PAGE_TYPES } from '../constants';
 
 const TaskCard = ({ task, updateTaskList }) => {
   const toggleCompletionStatus = (currentTask) => {
@@ -30,8 +32,17 @@ const TaskCard = ({ task, updateTaskList }) => {
             toggleCompletionStatus(task);
           }}
         />
-        <div className={taskCardStyles.line}></div>
-        <TaskContents />
+        <div className={taskCardStyles.line1}></div>
+        <TaskContents className={taskCardStyles.contents} />
+        <div className={taskCardStyles.line2}></div>
+        <img
+          src={
+            task.isFavorite === IS_FAVORITE.TRUE
+              ? filledStarImg
+              : unfilledStarImg
+          }
+          className={taskCardStyles.favorites}
+        />
       </Card.Body>
     </Card>
   );
