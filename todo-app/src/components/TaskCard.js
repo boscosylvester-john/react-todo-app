@@ -18,6 +18,15 @@ const TaskCard = ({ task, updateTaskList }) => {
     updateTaskList(currentTask);
   };
 
+  const toggleFavoriteStatus = (currentTask) => {
+    if (currentTask.isFavorite === IS_FAVORITE.TRUE) {
+      currentTask.isFavorite = IS_FAVORITE.FALSE;
+    } else {
+      currentTask.isFavorite = IS_FAVORITE.TRUE;
+    }
+    updateTaskList(currentTask);
+  };
+
   return (
     <Card className={taskCardStyles.task}>
       <Card.Body>
@@ -41,6 +50,9 @@ const TaskCard = ({ task, updateTaskList }) => {
               ? filledStarImg
               : unfilledStarImg
           }
+          onClick={() => {
+            toggleFavoriteStatus(task);
+          }}
           className={taskCardStyles.favorites}
         />
       </Card.Body>
