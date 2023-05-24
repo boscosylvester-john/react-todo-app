@@ -16,3 +16,14 @@ export const ACTION_TYPE = {
   NEW: 'NEW',
   UPDATE: 'UPDATE'
 };
+
+export const DUMMY_CURRENT_TASK = {
+  id: 0,
+  subject: '',
+  description: '',
+  dueDate: '',
+  reminderDate: '',
+  status: '',
+  isFavorite: 'FALSE',
+  createdOn: ''
+};

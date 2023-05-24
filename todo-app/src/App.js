@@ -16,6 +16,7 @@ const App = () => {
     let updatedList = Object.assign([], allTasks);
     switch (action) {
       case ACTION_TYPE.NEW:
+        changedTask.id = getNewTaskId();
         updatedList.push(changedTask);
         break;
       case ACTION_TYPE.UPDATE:
@@ -26,6 +27,13 @@ const App = () => {
         break;
     }
     setAllTasks(updatedList);
+  };
+
+  const getNewTaskId = () => {
+    return (
+      Math.max(...allTasks.map((task) => Number(task.id))) +
+      1
+    );
   };
 
   useEffect(() => {
