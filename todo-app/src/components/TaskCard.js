@@ -3,10 +3,12 @@ import Card from 'react-bootstrap/Card';
 import taskCardStyles from './TaskCard.module.css';
 import completedTaskImg from '../icons/completedtasks.png';
 import pendingTaskImg from '../icons/pendingtasks.png';
-import filledStarImg from '../icons/filledstar.png';
-import unfilledStarImg from '../icons/unfilledstar.png';
+// import filledStarImg from '../icons/filledstar.png';
+// import unfilledStarImg from '../icons/unfilledstar.png';
 import TaskContents from './TaskContents';
 import { IS_FAVORITE, PAGE_TYPES } from '../constants';
+import { AiFillStar } from 'react-icons/ai';
+import { AiOutlineStar } from 'react-icons/ai';
 
 const TaskCard = ({ task, updateTaskList }) => {
   const toggleCompletionStatus = (currentTask) => {
@@ -48,17 +50,21 @@ const TaskCard = ({ task, updateTaskList }) => {
           updateTaskList={updateTaskList}
         />
         <div className={taskCardStyles.line2}></div>
-        <img
-          src={
-            task.isFavorite === IS_FAVORITE.TRUE
-              ? filledStarImg
-              : unfilledStarImg
-          }
-          onClick={() => {
-            toggleFavoriteStatus(task);
-          }}
-          className={taskCardStyles.favorites}
-        />
+        {task.isFavorite === IS_FAVORITE.TRUE ? (
+          <AiFillStar
+            className={taskCardStyles.favorites}
+            onClick={() => {
+              toggleFavoriteStatus(task);
+            }}
+          />
+        ) : (
+          <AiOutlineStar
+            className={taskCardStyles.unfavorite}
+            onClick={() => {
+              toggleFavoriteStatus(task);
+            }}
+          />
+        )}
       </Card.Body>
     </Card>
   );
