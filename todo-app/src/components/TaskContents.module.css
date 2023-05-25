@@ -1,3 +1,26 @@
 .contents {
 	margin-left: 4%;
+	width: 30%;
+}
+
+.dates {
+	margin-top: 0.3%;
+}
+
+.calendar{
+	font-size: 1.3em;
+	margin: -1% 1% 0 0;
+}
+
+.reminder{
+	font-size: 1.1em;
+	margin: -0.5% 1% 0 5%;
+}
+
+.overdue {
+	color: #FF0000;
+}
+
+.notDue {
+	color: black
 }

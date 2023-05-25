@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import mainContentStyles from './MainContent.module.css';
 import TaskCard from './TaskCard';
 import { IS_FAVORITE, PAGE_TYPES } from '../constants';
+import { isOverdue } from './utils';
 
 const MainContent = ({
   pageType,
@@ -22,9 +23,7 @@ const MainContent = ({
         filteredTasks = filteredTasks.filter(
           (task) =>
             task.status === PAGE_TYPES.PENDING &&
-            new Date(task.dueDate) < new Date() &&
-            new Date(task.dueDate).toDateString() !==
-              new Date().toDateString()
+            isOverdue(task.dueDate)
         );
         break;
       case PAGE_TYPES.MY_DAY:

@@ -42,7 +42,11 @@ const TaskCard = ({ task, updateTaskList }) => {
           }}
         />
         <div className={taskCardStyles.line1}></div>
-        <TaskContents className={taskCardStyles.contents} />
+        <TaskContents
+          className={taskCardStyles.contents}
+          task={task}
+          updateTaskList={updateTaskList}
+        />
         <div className={taskCardStyles.line2}></div>
         <img
           src={
