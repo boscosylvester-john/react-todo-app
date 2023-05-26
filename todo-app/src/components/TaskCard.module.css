@@ -2,11 +2,20 @@
 	margin: 2% 1% 1% 1%;
 }
 
-.checkImage {
+.completed {
 	float: left;
-	margin-left: -1%;
-	width: 4%;
-	height: 4%;
+	margin: 1% 0 0 -0.3%;
+	width: 2.2%;
+	height: 2.2%;
+	cursor: pointer;
+}
+
+.notCompleted {
+	float: left;
+	margin: 1% 0 0 -0.3%;
+	width: 2.2%;
+	height: 2.2%;
+	cursor: pointer;
 }
 
 .line1 {
@@ -34,7 +43,8 @@
 	margin: -3.5% -0.2% 0 0;	
 	width: 2.5%;
 	height: 2.5%;
-	color: #FFDF00
+	color: #FFDF00;
+	cursor: pointer;
 }
 
 .unfavorite {
@@ -42,4 +52,5 @@
 	margin: -3.5% -0.2% 0 0;	
 	width: 2.5%;
 	height: 2.5%;
+	cursor: pointer;
 }
