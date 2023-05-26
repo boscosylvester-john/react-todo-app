@@ -6,7 +6,6 @@ import { isOverdue } from './utils';
 
 const TaskContents = ({ task, updateTaskList }) => {
   console.log(updateTaskList);
-  console.log(task, isOverdue(task.dueDate));
   return (
     <div className={taskContentsStyles.contents}>
       {task.subject}
