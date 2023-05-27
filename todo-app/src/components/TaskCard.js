@@ -10,7 +10,11 @@ import {
   AiOutlineCheckCircle
 } from 'react-icons/ai';
 
-const TaskCard = ({ task, updateTaskList }) => {
+const TaskCard = ({
+  task,
+  updateTaskList,
+  displayModal
+}) => {
   const toggleCompletionStatus = (currentTask) => {
     if (currentTask.status === PAGE_TYPES.COMPLETED) {
       currentTask.status = PAGE_TYPES.PENDING;
@@ -51,7 +55,7 @@ const TaskCard = ({ task, updateTaskList }) => {
         <TaskContents
           className={taskCardStyles.contents}
           task={task}
-          updateTaskList={updateTaskList}
+          displayModal={displayModal}
         />
         <div className={taskCardStyles.line2}></div>
         {task.isFavorite === IS_FAVORITE.TRUE ? (

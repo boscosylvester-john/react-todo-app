@@ -12,9 +12,10 @@ export const IS_FAVORITE = {
   FALSE: 'FALSE'
 };
 
-export const ACTION_TYPE = {
+export const MODAL_ACTION_TYPE = {
   NEW: 'NEW',
-  UPDATE: 'UPDATE'
+  UPDATE: 'UPDATE',
+  NONE: 'NONE'
 };
 
 export const DUMMY_CURRENT_TASK = {
@@ -23,7 +24,7 @@ export const DUMMY_CURRENT_TASK = {
   description: '',
   dueDate: '',
   reminderDate: '',
-  status: '',
+  status: PAGE_TYPES.PENDING,
   isFavorite: 'FALSE',
   createdOn: ''
 };

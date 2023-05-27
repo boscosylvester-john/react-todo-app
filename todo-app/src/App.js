@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import MainContent from './components/MainContent';
 import Navigation from './components/Navigation';
-import { ACTION_TYPE, PAGE_TYPES } from './constants';
+import { MODAL_ACTION_TYPE, PAGE_TYPES } from './constants';
 import { getTasks } from './apiCalls';
+import TaskModal from './components/TaskModal';
 
 const App = () => {
   const [pageType, setPageType] = useState(
@@ -12,14 +13,22 @@ const App = () => {
 
   const [allTasks, setAllTasks] = useState([]);
 
+  const [showModal, setShowModal] = useState(false);
+
+  const [modalTask, setModalTask] = useState({});
+
+  const [modalActionType, setModalActionType] = useState(
+    MODAL_ACTION_TYPE.NONE
+  );
+
   const updateTaskList = (changedTask, action) => {
     let updatedList = Object.assign([], allTasks);
     switch (action) {
-      case ACTION_TYPE.NEW:
+      case MODAL_ACTION_TYPE.NEW:
         changedTask.id = getNewTaskId();
         updatedList.push(changedTask);
         break;
-      case ACTION_TYPE.UPDATE:
+      case MODAL_ACTION_TYPE.UPDATE:
         updatedList = updatedList.filter(
           (task) => task.id !== changedTask.id
         );
@@ -36,6 +45,18 @@ const App = () => {
     );
   };
 
+  const displayModal = (actionType, task) => {
+    setModalActionType(actionType);
+    setModalTask(task);
+    setShowModal(true);
+  };
+
+  const hideModal = () => {
+    setModalActionType(MODAL_ACTION_TYPE.NONE);
+    setModalTask({});
+    setShowModal(false);
+  };
+
   useEffect(() => {
     const fetchTasks = async () => {
       const result = await getTasks();
@@ -48,12 +69,20 @@ const App = () => {
     <div>
       <Navigation
         setPageType={setPageType}
+        displayModal={displayModal}
+      />
+      <TaskModal
+        currentTask={modalTask}
+        submitType={modalActionType}
+        showModal={showModal}
+        hideModal={hideModal}
         updateTaskList={updateTaskList}
       />
       <MainContent
         pageType={pageType}
         allTasks={allTasks}
         updateTaskList={updateTaskList}
+        displayModal={displayModal}
       />
     </div>
   );

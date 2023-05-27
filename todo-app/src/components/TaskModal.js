@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { ACTION_TYPE, IS_FAVORITE } from '../constants';
+import {
+  DUMMY_CURRENT_TASK,
+  IS_FAVORITE,
+  MODAL_ACTION_TYPE
+} from '../constants';
 import Form from 'react-bootstrap/Form';
 import taskModalStyles from './TaskModal.module.css';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
@@ -10,7 +14,7 @@ const TaskModal = ({
   currentTask,
   submitType,
   showModal,
-  setShowModal,
+  hideModal,
   updateTaskList
 }) => {
   const [subject, setSubject] = useState(
@@ -33,13 +37,35 @@ const TaskModal = ({
     currentTask.isFavorite
   );
 
+  useEffect(() => {
+    setSubject(currentTask.subject);
+    setDescription(currentTask.description);
+    setDueDate(currentTask.dueDate);
+    setReminderDate(currentTask.reminderDate);
+    setIsFavorite(currentTask.isFavorite);
+  }, [currentTask]);
+
   const closeModal = () => {
-    setShowModal(false);
+    resetValues();
+    hideModal();
   };
 
-  const submitChanges = (task, action) => {
+  const submitChanges = (action) => {
+    const task = DUMMY_CURRENT_TASK;
+    task.subject = subject;
+    task.description = description;
+    task.dueDate = dueDate;
+    task.reminderDate = reminderDate;
+    task.isFavorite = isFavorite;
+    const today = new Date();
+    task.createdOn =
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate();
     updateTaskList(task, action);
-    setShowModal(false);
+    hideModal();
   };
 
   const resetValues = () => {
@@ -62,7 +88,7 @@ const TaskModal = ({
     <Modal show={showModal} onHide={closeModal}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {submitType === ACTION_TYPE.NEW
+          {submitType === MODAL_ACTION_TYPE.NEW
             ? 'Create your new task...'
             : 'Update your task'}
         </Modal.Title>
@@ -167,10 +193,22 @@ const TaskModal = ({
               variant="primary"
               type="submit"
               className={taskModalStyles.submitButton}
-              onClick={() => {
-                submitChanges(currentTask, submitType);
+              onClick={(event) => {
+                event.preventDefault();
+                switch (submitType) {
+                  case MODAL_ACTION_TYPE.NEW:
+                    submitChanges(submitType);
+                    break;
+                  case MODAL_ACTION_TYPE.UPDATE:
+                    currentTask.subject = subject;
+                    currentTask.description = description;
+                    currentTask.dueDate = dueDate;
+                    currentTask.reminderDate = reminderDate;
+                    currentTask.isFavorite = isFavorite;
+                    updateTaskList(currentTask, submitType);
+                }
               }}>
-              {submitType === ACTION_TYPE.NEW
+              {submitType === MODAL_ACTION_TYPE.NEW
                 ? 'Create Task'
                 : 'Update Task'}
             </Button>

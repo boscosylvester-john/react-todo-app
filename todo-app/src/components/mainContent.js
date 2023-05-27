@@ -7,7 +7,8 @@ import { isOverdue } from './utils';
 const MainContent = ({
   pageType,
   allTasks,
-  updateTaskList
+  updateTaskList,
+  displayModal
 }) => {
   const [currentTasks, setCurrentTasks] = useState([]);
 
@@ -53,6 +54,7 @@ const MainContent = ({
               <TaskCard
                 task={task}
                 updateTaskList={updateTaskList}
+                displayModal={displayModal}
                 key={index}
               />
             );
