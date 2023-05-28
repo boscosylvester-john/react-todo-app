@@ -57,7 +57,7 @@ const App = () => {
     setShowModal(true);
   };
 
-  const hideModal = async () => {
+  const hideModal = () => {
     setModalActionType(MODAL_ACTION_TYPE.NONE);
     setModalTask(DUMMY_CURRENT_TASK);
     setShowModal(false);

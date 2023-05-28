@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {
+  DUMMY_CURRENT_TASK,
   IS_FAVORITE,
   MODAL_ACTION_TYPE
 } from '../constants';
@@ -68,23 +69,24 @@ const TaskModal = ({
     if (!validate()) {
       return;
     }
+    let task;
     if (action === MODAL_ACTION_TYPE.NEW) {
+      task = DUMMY_CURRENT_TASK;
       const today = new Date();
-      currentTask.createdOn =
+      task.createdOn =
         today.getFullYear() +
         '-' +
         (today.getMonth() + 1) +
         '-' +
         today.getDate();
     }
-    currentTask.subject = subject;
-    currentTask.description = description;
-    currentTask.dueDate = dueDate;
-    currentTask.reminderDate = reminderDate;
-    currentTask.isFavorite = isFavorite;
-    updateTaskList(currentTask, action);
-    resetValues();
+    task.subject = subject;
+    task.description = description;
+    task.dueDate = dueDate;
+    task.reminderDate = reminderDate;
+    task.isFavorite = isFavorite;
     hideModal();
+    updateTaskList(task, action);
   };
 
   const resetValues = () => {
