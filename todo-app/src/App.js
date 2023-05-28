@@ -5,7 +5,8 @@ import Navigation from './components/Navigation';
 import {
   DUMMY_CURRENT_TASK,
   MODAL_ACTION_TYPE,
-  PAGE_TYPES
+  PAGE_TYPES,
+  SORTING_OPTIONS
 } from './constants';
 import { getTasks } from './apiCalls';
 import TaskModal from './components/TaskModal';
@@ -42,6 +43,35 @@ const App = () => {
         break;
     }
     setAllTasks(updatedList);
+  };
+
+  const sortTasks = (sortby) => {
+    let sortedTasks = Object.assign([], allTasks);
+    switch (sortby) {
+      case SORTING_OPTIONS.DEFAULT:
+        sortedTasks = sortedTasks.sort((t1, t2) => {
+          return t1 - t2;
+        });
+        break;
+      case SORTING_OPTIONS.DUE_DATE:
+        sortedTasks = sortedTasks.sort((t1, t2) => {
+          return (
+            new Date(t1.dueDate) - new Date(t2.dueDate)
+          );
+        });
+        break;
+      case SORTING_OPTIONS.REMINDER_DATE:
+        sortedTasks = sortedTasks.sort((t1, t2) => {
+          return (
+            new Date(t1.reminderDate) -
+            new Date(t2.reminderDate)
+          );
+        });
+        break;
+      default:
+        break;
+    }
+    setAllTasks(sortedTasks);
   };
 
   const getNewTaskId = () => {
@@ -88,6 +118,7 @@ const App = () => {
         pageType={pageType}
         allTasks={allTasks}
         updateTaskList={updateTaskList}
+        sortTasks={sortTasks}
         displayModal={displayModal}
       />
     </div>

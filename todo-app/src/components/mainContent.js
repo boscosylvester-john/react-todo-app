@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import mainContentStyles from './MainContent.module.css';
 import TaskCard from './TaskCard';
+import Sorter from './Sorter';
 import { IS_FAVORITE, PAGE_TYPES } from '../constants';
 import { isOverdue } from './utils';
 
@@ -8,6 +9,7 @@ const MainContent = ({
   pageType,
   allTasks,
   updateTaskList,
+  sortTasks,
   displayModal
 }) => {
   const [currentTasks, setCurrentTasks] = useState([]);
@@ -47,9 +49,12 @@ const MainContent = ({
 
   return (
     <div className={mainContentStyles.container}>
-      {currentTasks && currentTasks.length === 0
-        ? 'No tasks yet, start by creating new tasks'
-        : currentTasks.map((task, index) => {
+      {currentTasks && currentTasks.length === 0 ? (
+        'No tasks yet, start by creating new tasks'
+      ) : (
+        <>
+          <Sorter sortTasks={sortTasks} />
+          {currentTasks.map((task, index) => {
             return (
               <TaskCard
                 task={task}
@@ -59,6 +64,8 @@ const MainContent = ({
               />
             );
           })}
+        </>
+      )}
     </div>
   );
 };

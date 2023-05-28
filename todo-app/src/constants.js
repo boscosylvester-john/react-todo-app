@@ -28,3 +28,15 @@ export const DUMMY_CURRENT_TASK = {
   isFavorite: 'FALSE',
   createdOn: ''
 };
+
+export const SORTING_OPTIONS = {
+  DEFAULT: 'Default',
+  DUE_DATE: 'By Due Date',
+  REMINDER_DATE: 'By Reminder Date'
+};
+
+export const SORTING_OPTIONS_ARRAY = [
+  SORTING_OPTIONS.DEFAULT,
+  SORTING_OPTIONS.DUE_DATE,
+  SORTING_OPTIONS.REMINDER_DATE
+];
