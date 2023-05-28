@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import {
-  DUMMY_CURRENT_TASK,
   IS_FAVORITE,
   MODAL_ACTION_TYPE
 } from '../constants';
@@ -37,6 +36,8 @@ const TaskModal = ({
     currentTask.isFavorite
   );
 
+  const [isValidInput, setIsValidInput] = useState(false);
+
   useEffect(() => {
     setSubject(currentTask.subject);
     setDescription(currentTask.description);
@@ -50,21 +51,39 @@ const TaskModal = ({
     hideModal();
   };
 
+  const validate = () => {
+    if (
+      subject === '' ||
+      description === '' ||
+      dueDate === ''
+    ) {
+      setIsValidInput(false);
+      return false;
+    }
+    setIsValidInput(true);
+    return true;
+  };
+
   const submitChanges = (action) => {
-    const task = DUMMY_CURRENT_TASK;
-    task.subject = subject;
-    task.description = description;
-    task.dueDate = dueDate;
-    task.reminderDate = reminderDate;
-    task.isFavorite = isFavorite;
-    const today = new Date();
-    task.createdOn =
-      today.getFullYear() +
-      '-' +
-      (today.getMonth() + 1) +
-      '-' +
-      today.getDate();
-    updateTaskList(task, action);
+    if (!validate()) {
+      return;
+    }
+    if (action === MODAL_ACTION_TYPE.NEW) {
+      const today = new Date();
+      currentTask.createdOn =
+        today.getFullYear() +
+        '-' +
+        (today.getMonth() + 1) +
+        '-' +
+        today.getDate();
+    }
+    currentTask.subject = subject;
+    currentTask.description = description;
+    currentTask.dueDate = dueDate;
+    currentTask.reminderDate = reminderDate;
+    currentTask.isFavorite = isFavorite;
+    updateTaskList(currentTask, action);
+    resetValues();
     hideModal();
   };
 
@@ -159,7 +178,7 @@ const TaskModal = ({
               </span>
             </Form.Label>
             <Form.Control
-              type="input"
+              type="date"
               className={taskModalStyles.formControls}
               placeholder="Enter due date"
               value={dueDate}
@@ -173,7 +192,7 @@ const TaskModal = ({
           <Form.Group>
             <Form.Label>Reminder Date</Form.Label>
             <Form.Control
-              type="input"
+              type="date"
               className={taskModalStyles.formControls}
               placeholder="Enter reminder date"
               value={reminderDate}
@@ -182,6 +201,14 @@ const TaskModal = ({
               }}
             />
           </Form.Group>
+          {isValidInput ? null : (
+            <Form.Group>
+              <Form.Label
+                className={taskModalStyles.requiredField}>
+                *Fill required fields
+              </Form.Label>
+            </Form.Group>
+          )}
           <div className={taskModalStyles.buttonGroup}>
             <Button
               variant="secondary"
@@ -195,18 +222,8 @@ const TaskModal = ({
               className={taskModalStyles.submitButton}
               onClick={(event) => {
                 event.preventDefault();
-                switch (submitType) {
-                  case MODAL_ACTION_TYPE.NEW:
-                    submitChanges(submitType);
-                    break;
-                  case MODAL_ACTION_TYPE.UPDATE:
-                    currentTask.subject = subject;
-                    currentTask.description = description;
-                    currentTask.dueDate = dueDate;
-                    currentTask.reminderDate = reminderDate;
-                    currentTask.isFavorite = isFavorite;
-                    updateTaskList(currentTask, submitType);
-                }
+
+                submitChanges(submitType);
               }}>
               {submitType === MODAL_ACTION_TYPE.NEW
                 ? 'Create Task'

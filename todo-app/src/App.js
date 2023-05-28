@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import MainContent from './components/MainContent';
 import Navigation from './components/Navigation';
-import { MODAL_ACTION_TYPE, PAGE_TYPES } from './constants';
+import {
+  DUMMY_CURRENT_TASK,
+  MODAL_ACTION_TYPE,
+  PAGE_TYPES
+} from './constants';
 import { getTasks } from './apiCalls';
 import TaskModal from './components/TaskModal';
 
@@ -15,7 +19,9 @@ const App = () => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [modalTask, setModalTask] = useState({});
+  const [modalTask, setModalTask] = useState(
+    DUMMY_CURRENT_TASK
+  );
 
   const [modalActionType, setModalActionType] = useState(
     MODAL_ACTION_TYPE.NONE
@@ -51,9 +57,9 @@ const App = () => {
     setShowModal(true);
   };
 
-  const hideModal = () => {
+  const hideModal = async () => {
     setModalActionType(MODAL_ACTION_TYPE.NONE);
-    setModalTask({});
+    setModalTask(DUMMY_CURRENT_TASK);
     setShowModal(false);
   };
 
