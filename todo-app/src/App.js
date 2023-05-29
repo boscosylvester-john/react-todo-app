@@ -16,6 +16,8 @@ const App = () => {
     PAGE_TYPES.TASKS
   );
 
+  const [allTasks, setAllTasks] = useState([]);
+
   const [filteredTasks, setFilteredTasks] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +31,7 @@ const App = () => {
   );
 
   const updateTaskList = (changedTask, action) => {
-    let updatedList = Object.assign([], filteredTasks);
+    let updatedList = Object.assign([], allTasks);
     switch (action) {
       case MODAL_ACTION_TYPE.NEW:
         changedTask.id = getNewTaskId();
@@ -42,6 +44,7 @@ const App = () => {
         updatedList.push(changedTask);
         break;
     }
+    setAllTasks(updatedList);
     setFilteredTasks(updatedList);
   };
 
@@ -75,6 +78,24 @@ const App = () => {
     setFilteredTasks(sortedTasks);
   };
 
+  const searchTasks = (searchKey) => {
+    if (searchKey === '') {
+      setFilteredTasks(allTasks);
+      return;
+    }
+    let tempTasks = Object.assign([], allTasks);
+    tempTasks = tempTasks.filter(
+      (task) =>
+        task.subject
+          .toLowerCase()
+          .includes(searchKey.toLowerCase()) ||
+        task.description
+          .toLowerCase()
+          .includes(searchKey.toLowerCase())
+    );
+    setFilteredTasks(tempTasks);
+  };
+
   const getNewTaskId = () => {
     return (
       Math.max(
@@ -99,6 +120,7 @@ const App = () => {
     const fetchTasks = async () => {
       const result = await getTasks();
       setFilteredTasks(result);
+      setAllTasks(result);
     };
     fetchTasks();
   }, []);
@@ -121,6 +143,7 @@ const App = () => {
         filteredTasks={filteredTasks}
         updateTaskList={updateTaskList}
         sortTasks={sortTasks}
+        searchTasks={searchTasks}
         displayModal={displayModal}
       />
     </div>

@@ -11,6 +11,7 @@ const MainContent = ({
   filteredTasks,
   updateTaskList,
   sortTasks,
+  searchTasks,
   displayModal
 }) => {
   const [currentTasks, setCurrentTasks] = useState([]);
@@ -50,12 +51,12 @@ const MainContent = ({
 
   return (
     <div className={mainContentStyles.container}>
+      <Searcher searchTasks={searchTasks} />
+      <Sorter sortTasks={sortTasks} />
       {currentTasks && currentTasks.length === 0 ? (
         'No tasks yet, start by creating new tasks'
       ) : (
         <>
-          <Searcher />
-          <Sorter sortTasks={sortTasks} />
           {currentTasks.map((task, index) => {
             return (
               <TaskCard

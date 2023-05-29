@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import searcherStyles from './Searcher.module.css';
 
-const Searcher = () => {
+const Searcher = ({ searchTasks }) => {
   const [searchKey, setSearchKey] = useState('');
+
+  useEffect(() => {
+    searchTasks(searchKey);
+  }, [searchKey]);
 
   return (
     <div className={searcherStyles.searchInput}>
