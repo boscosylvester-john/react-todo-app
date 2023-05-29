@@ -10,6 +10,7 @@ import {
 } from './constants';
 import { getTasks } from './apiCalls';
 import TaskModal from './components/TaskModal';
+import todoBackground from './images/todo_background.jpg';
 
 const App = () => {
   const [pageType, setPageType] = useState(
@@ -126,7 +127,11 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${todoBackground})`,
+        height: 'parent'
+      }}>
       <Navigation
         setPageType={setPageType}
         displayModal={displayModal}

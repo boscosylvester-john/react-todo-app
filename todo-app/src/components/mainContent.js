@@ -54,7 +54,9 @@ const MainContent = ({
       <Searcher searchTasks={searchTasks} />
       <Sorter sortTasks={sortTasks} />
       {currentTasks && currentTasks.length === 0 ? (
-        'No tasks yet, start by creating new tasks'
+        <span>
+          No tasks yet, start by creating new tasks
+        </span>
       ) : (
         <>
           {currentTasks.map((task, index) => {
