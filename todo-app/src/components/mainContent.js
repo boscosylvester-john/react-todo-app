@@ -7,7 +7,7 @@ import { isOverdue } from './utils';
 
 const MainContent = ({
   pageType,
-  allTasks,
+  filteredTasks,
   updateTaskList,
   sortTasks,
   displayModal
@@ -15,37 +15,37 @@ const MainContent = ({
   const [currentTasks, setCurrentTasks] = useState([]);
 
   useEffect(() => {
-    let filteredTasks = allTasks;
+    let finalTasks = filteredTasks;
     switch (pageType) {
       case PAGE_TYPES.COMPLETED:
-        filteredTasks = filteredTasks.filter(
+        finalTasks = finalTasks.filter(
           (task) => task.status === pageType
         );
         break;
       case PAGE_TYPES.MISSED_TASKS:
-        filteredTasks = filteredTasks.filter(
+        finalTasks = finalTasks.filter(
           (task) =>
             task.status === PAGE_TYPES.PENDING &&
             isOverdue(task.dueDate)
         );
         break;
       case PAGE_TYPES.MY_DAY:
-        filteredTasks = filteredTasks.filter(
+        finalTasks = finalTasks.filter(
           (task) =>
             new Date(task.dueDate).toDateString() ===
             new Date().toDateString()
         );
         break;
       case PAGE_TYPES.FAVORITES:
-        filteredTasks = filteredTasks.filter(
+        finalTasks = finalTasks.filter(
           (task) => task.isFavorite === IS_FAVORITE.TRUE
         );
         break;
       default:
         break;
     }
-    setCurrentTasks(filteredTasks);
-  }, [pageType, allTasks]);
+    setCurrentTasks(finalTasks);
+  }, [pageType, filteredTasks]);
 
   return (
     <div className={mainContentStyles.container}>

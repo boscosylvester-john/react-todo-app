@@ -16,7 +16,7 @@ const App = () => {
     PAGE_TYPES.TASKS
   );
 
-  const [allTasks, setAllTasks] = useState([]);
+  const [filteredTasks, setFilteredTasks] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -29,7 +29,7 @@ const App = () => {
   );
 
   const updateTaskList = (changedTask, action) => {
-    let updatedList = Object.assign([], allTasks);
+    let updatedList = Object.assign([], filteredTasks);
     switch (action) {
       case MODAL_ACTION_TYPE.NEW:
         changedTask.id = getNewTaskId();
@@ -42,11 +42,11 @@ const App = () => {
         updatedList.push(changedTask);
         break;
     }
-    setAllTasks(updatedList);
+    setFilteredTasks(updatedList);
   };
 
   const sortTasks = (sortby, isSortAsc) => {
-    let sortedTasks = Object.assign([], allTasks);
+    let sortedTasks = Object.assign([], filteredTasks);
     switch (sortby) {
       case SORTING_OPTIONS.DEFAULT:
         sortedTasks = sortedTasks.sort((t1, t2) => {
@@ -72,13 +72,14 @@ const App = () => {
       default:
         break;
     }
-    setAllTasks(sortedTasks);
+    setFilteredTasks(sortedTasks);
   };
 
   const getNewTaskId = () => {
     return (
-      Math.max(...allTasks.map((task) => Number(task.id))) +
-      1
+      Math.max(
+        ...filteredTasks.map((task) => Number(task.id))
+      ) + 1
     );
   };
 
@@ -97,7 +98,7 @@ const App = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       const result = await getTasks();
-      setAllTasks(result);
+      setFilteredTasks(result);
     };
     fetchTasks();
   }, []);
@@ -117,7 +118,7 @@ const App = () => {
       />
       <MainContent
         pageType={pageType}
-        allTasks={allTasks}
+        filteredTasks={filteredTasks}
         updateTaskList={updateTaskList}
         sortTasks={sortTasks}
         displayModal={displayModal}
