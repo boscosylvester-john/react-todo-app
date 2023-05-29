@@ -45,27 +45,28 @@ const App = () => {
     setAllTasks(updatedList);
   };
 
-  const sortTasks = (sortby) => {
+  const sortTasks = (sortby, isSortAsc) => {
     let sortedTasks = Object.assign([], allTasks);
     switch (sortby) {
       case SORTING_OPTIONS.DEFAULT:
         sortedTasks = sortedTasks.sort((t1, t2) => {
-          return t1 - t2;
+          return isSortAsc ? t1.id - t2.id : t2.id - t1.id;
         });
         break;
       case SORTING_OPTIONS.DUE_DATE:
         sortedTasks = sortedTasks.sort((t1, t2) => {
-          return (
-            new Date(t1.dueDate) - new Date(t2.dueDate)
-          );
+          return isSortAsc
+            ? new Date(t1.dueDate) - new Date(t2.dueDate)
+            : new Date(t2.dueDate) - new Date(t1.dueDate);
         });
         break;
       case SORTING_OPTIONS.REMINDER_DATE:
         sortedTasks = sortedTasks.sort((t1, t2) => {
-          return (
-            new Date(t1.reminderDate) -
-            new Date(t2.reminderDate)
-          );
+          return isSortAsc
+            ? new Date(t1.reminderDate) -
+                new Date(t2.reminderDate)
+            : new Date(t2.reminderDate) -
+                new Date(t1.reminderDate);
         });
         break;
       default:

@@ -12,15 +12,24 @@ const Sorter = ({ sortTasks }) => {
     SORTING_OPTIONS.DEFAULT
   );
 
+  const [isSortAsc, setIsSortAsc] = useState(true);
+
   useEffect(() => {
-    sortTasks(sorterValue);
-  }, [sorterValue]);
+    sortTasks(sorterValue, isSortAsc);
+  }, [sorterValue, isSortAsc]);
 
   return (
     <div className={sorterStyles.sortOptionDropdown}>
       <Form.Group className="mb-3">
-        <Form.Label>Sort by</Form.Label>
-        <BiSortAlt2 className={sorterStyles.sortIcon} />
+        <Form.Label>
+          Sort by ({isSortAsc ? 'ASC' : 'DES'})
+        </Form.Label>
+        <BiSortAlt2
+          className={sorterStyles.sortIcon}
+          onClick={() => {
+            setIsSortAsc(!isSortAsc);
+          }}
+        />
         <Form.Select
           value={sorterValue}
           onChange={(event) => {

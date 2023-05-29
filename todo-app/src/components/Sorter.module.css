@@ -6,5 +6,6 @@
 .sortIcon {
 	height: 15%;
 	width: 15%;
-	margin-left: 55%;
+	margin-left: 25%;
+	cursor: pointer;
 }
