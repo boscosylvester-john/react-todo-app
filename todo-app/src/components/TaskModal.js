@@ -69,7 +69,7 @@ const TaskModal = ({
     if (!validate()) {
       return;
     }
-    let task;
+    let task = Object.assign({}, currentTask);
     if (action === MODAL_ACTION_TYPE.NEW) {
       task = DUMMY_CURRENT_TASK;
       const today = new Date();
