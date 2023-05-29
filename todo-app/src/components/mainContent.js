@@ -4,6 +4,7 @@ import TaskCard from './TaskCard';
 import Sorter from './Sorter';
 import { IS_FAVORITE, PAGE_TYPES } from '../constants';
 import { isOverdue } from './utils';
+import Searcher from './Searcher';
 
 const MainContent = ({
   pageType,
@@ -53,6 +54,7 @@ const MainContent = ({
         'No tasks yet, start by creating new tasks'
       ) : (
         <>
+          <Searcher />
           <Sorter sortTasks={sortTasks} />
           {currentTasks.map((task, index) => {
             return (
