@@ -5,6 +5,7 @@ import {
   SORTING_OPTIONS_ARRAY
 } from '../constants';
 import sorterStyles from './Sorter.module.css';
+import { BiSortAlt2 } from 'react-icons/bi';
 
 const Sorter = ({ sortTasks }) => {
   const [sorterValue, setSorterValue] = useState(
@@ -19,6 +20,7 @@ const Sorter = ({ sortTasks }) => {
     <div className={sorterStyles.sortOptionDropdown}>
       <Form.Group className="mb-3">
         <Form.Label>Sort by</Form.Label>
+        <BiSortAlt2 className={sorterStyles.sortIcon} />
         <Form.Select
           value={sorterValue}
           onChange={(event) => {
