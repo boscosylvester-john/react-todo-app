@@ -29,11 +29,14 @@
 Implementing different functionalities of a to-do app using React and using react-bootstrap to design different components. 
 
 ### Project Specifics
+* React Framework: CRA
 * Component type: Functional components
-* Data passing between components: Props (for parent to child) and Callbacks (for child to parent)
-* API Calls: Axios
+* State Management: Props (for parent to child) and Callbacks (for child to parent)
+* Data Fetching: Axios
 * Styling: react-bootstrap
 * Database/backend: json server
+* Code Formatting: Prettier
+* Linter: ESLint
 
 ### Functionalities
 * Creating new tasks
