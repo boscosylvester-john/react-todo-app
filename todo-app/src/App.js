@@ -44,6 +44,11 @@ const App = () => {
         );
         updatedList.push(changedTask);
         break;
+      case MODAL_ACTION_TYPE.DELETE:
+        updatedList = updatedList.filter(
+          (task) => task.id !== changedTask.id
+        );
+        break;
     }
     setAllTasks(updatedList);
     setFilteredTasks(updatedList);

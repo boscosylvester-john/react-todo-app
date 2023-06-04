@@ -15,6 +15,7 @@ export const IS_FAVORITE = {
 export const MODAL_ACTION_TYPE = {
   NEW: 'NEW',
   UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
   NONE: 'NONE'
 };
 

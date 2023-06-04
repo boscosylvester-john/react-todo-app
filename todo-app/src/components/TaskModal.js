@@ -217,6 +217,13 @@ const TaskModal = ({
           )}
           <AiOutlineDelete
             className={taskModalStyles.delete}
+            onClick={() => {
+              hideModal();
+              updateTaskList(
+                currentTask,
+                MODAL_ACTION_TYPE.DELETE
+              );
+            }}
           />
           <div className={taskModalStyles.buttonGroup}>
             <Button
@@ -231,7 +238,6 @@ const TaskModal = ({
               className={taskModalStyles.submitButton}
               onClick={(event) => {
                 event.preventDefault();
-
                 submitChanges(submitType);
               }}>
               {submitType === MODAL_ACTION_TYPE.NEW
