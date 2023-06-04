@@ -8,7 +8,11 @@ import {
 } from '../constants';
 import Form from 'react-bootstrap/Form';
 import taskModalStyles from './TaskModal.module.css';
-import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import {
+  AiFillStar,
+  AiOutlineStar,
+  AiOutlineDelete
+} from 'react-icons/ai';
 
 const TaskModal = ({
   currentTask,
@@ -211,6 +215,9 @@ const TaskModal = ({
               </Form.Label>
             </Form.Group>
           )}
+          <AiOutlineDelete
+            className={taskModalStyles.delete}
+          />
           <div className={taskModalStyles.buttonGroup}>
             <Button
               variant="secondary"

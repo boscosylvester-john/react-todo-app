@@ -35,3 +35,10 @@
 	height: 6%;
 	cursor: pointer;
 }
+
+.delete{
+	height: 8%;
+	width: 8%;
+	margin-top: 4%;
+	cursor: pointer;
+}
